@@ -3,9 +3,16 @@
 
 format: jb-book
 root: intro
-options:
-  numbered: true
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
+parts:
+- caption: PGF 101
+  chapters:
+  - file: numerical_inversion
+    title: Numerical inversion
+  - file: markdown
+  - file: notebooks
+  - file: markdown-notebooks
+- caption: Branching process
+  chapters:
+  - file: markdown2
+  - file: notebooks2
+
