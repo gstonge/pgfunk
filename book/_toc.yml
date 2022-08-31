@@ -2,17 +2,18 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: intro
+root: chapters/intro
 parts:
 - caption: PGF 101
   chapters:
-  - file: numerical_inversion
+  - file: chapters/definition_and_properties
+    title: Definition and properties
+  - file: chapters/numerical_inversion
     title: Numerical inversion
-  - file: markdown
-  - file: notebooks
-  - file: markdown-notebooks
+  - file: chapters/multivariate
+    title: Multivariate PGF
+
 - caption: Branching process
   chapters:
-  - file: markdown2
-  - file: notebooks2
+  - file: chapters/notebooks
 
