@@ -29,6 +29,7 @@ repository:
   url: https://github.com/gstonge/pgfunk # Online location of your book
   branch: "main"
 
+
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
@@ -39,3 +40,4 @@ html:
 
 launch_buttons:
   binderhub_url: "https://mybinder.org"
+  notebook_interface: "jupyterlab"
