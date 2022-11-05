@@ -37,3 +37,5 @@ html:
   use_repository_button: true
   home_page_in_navbar: false
 
+launch_buttons:
+  binderhub_url: "https://mybinder.org"
