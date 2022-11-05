@@ -24,11 +24,15 @@ sphinx:
   config:
     bibtex_reference_style: author_year
 
-# Information about where the book exists on the web
-repository:
-  url: https://github.com/gstonge/pgfunk # Online location of your book
-  branch: "main"
+# Information about where the book exists on the web --- uncomment the repository and launch for binder
 
+#repository:
+  #url: https://github.com/gstonge/pgfunk # Online location of your book
+  #branch: "main"
+
+#launch_buttons:
+  #binderhub_url: "https://mybinder.org"
+  #notebook_interface: "jupyterlab"
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
@@ -38,6 +42,4 @@ html:
   use_repository_button: true
   home_page_in_navbar: false
 
-launch_buttons:
-  binderhub_url: "https://mybinder.org"
-  notebook_interface: "jupyterlab"
+
