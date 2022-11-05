@@ -39,7 +39,7 @@ sphinx:
 html:
   use_edit_page_button: false
   use_issues_button: false
-  use_repository_button: true
+  use_repository_button: false #turn to true to show github repo
   home_page_in_navbar: false
 
 
