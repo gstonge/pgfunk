@@ -13,7 +13,13 @@ parts:
   - file: chapters/multivariate_pgf
     title: Multivariate PGF
 
-- caption: Branching process
+- caption: Applications
   chapters:
-  - file: chapters/notebooks
+  - file: chapters/branching_process
+    title: Branching process
+  - file: chapters/bond_percolation
+    title: Bond percolation
+  #- file: chapters/epidemic_on_networks
+    #title: Epidemic on networks
+
 
