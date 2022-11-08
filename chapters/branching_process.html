@@ -453,10 +453,7 @@ G_{t+1}(x,y)  &amp;= G_t(Q(xy),y) \;.
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-
-<span class="n">Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">G0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">5</span>
 <span class="n">N</span> <span class="o">=</span> <span class="mi">400</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
@@ -493,8 +490,42 @@ u &amp;= \sum_k q_k u^k \;, \\
   &amp;= Q(u) \;.
 \end{align}
 \end{split}\]</div>
-<p>One can see that <span class="math notranslate nohighlight">\(u = 1\)</span> is always a solution of this equation, but sometime there is another solution <span class="math notranslate nohighlight">\(u &lt; 1\)</span>.
-When this is the case, then the probability of extinction is simply the probability that all initial nodes have a finite number of descendent, thus <span class="math notranslate nohighlight">\(G_0(u)\)</span>, which is also smaller than 1.</p>
+<p>One can see that <span class="math notranslate nohighlight">\(u = 1\)</span> is always a solution of this self-consistent equation, but sometime there is another solution <span class="math notranslate nohighlight">\(u &lt; 1\)</span>.
+To find this solution, one can just start with some initial value <span class="math notranslate nohighlight">\(u &lt; 1\)</span> and iterate the equation.
+The probability of extinction is then simply the probability that all initial nodes have a finite number of descendent, i.e., <span class="math notranslate nohighlight">\(G_0(u)\)</span>, which is also smaller than 1.</p>
+<p>Below, we solve for the probability of extinction using different values of <span class="math notranslate nohighlight">\(\lambda\)</span> for the Poisson distribution. The probability of extinction is smaller than one when <span class="math notranslate nohighlight">\(\lambda &gt; 1\)</span>, so when on average, a nodes generates more than one descendent.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">l</span><span class="p">,</span><span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">l</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="c1">#l -&gt; lambda</span>
+<span class="n">G0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">llist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">usol</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">Pext</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">llist</span><span class="p">):</span>
+    <span class="n">u1</span> <span class="o">=</span> <span class="n">usol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">usol</span> <span class="k">else</span> <span class="mf">0.5</span>
+    <span class="n">u2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">u1</span><span class="p">)</span>
+    <span class="k">while</span>  <span class="nb">abs</span><span class="p">(</span><span class="n">u2</span><span class="o">-</span><span class="n">u1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">):</span>
+        <span class="n">u1</span> <span class="o">=</span> <span class="n">u2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">u2</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">l</span><span class="p">,</span><span class="n">u1</span><span class="p">)</span>
+    <span class="n">usol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u2</span><span class="p">)</span>
+    <span class="n">Pext</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">G0</span><span class="p">(</span><span class="n">u2</span><span class="p">))</span>
+<span class="n">Pext</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">Pext</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">llist</span><span class="p">,</span><span class="n">Pext</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">ls</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;grey&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\lambda$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Probability of extinction&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/branching_process_27_0.png" src="../_images/branching_process_27_0.png" />
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>When solving this type of self-consistent equation and scanning a paramater (here <span class="math notranslate nohighlight">\(\lambda\)</span>) it is useful to reuse the result from the previous value of <span class="math notranslate nohighlight">\(\lambda\)</span> to solve for the next one (it saves lots of computation). Here, it is better to start at the end (large <span class="math notranslate nohighlight">\(\lambda\)</span>) to avoid numerical issues—one is invited to try it the other way around and see what happens.</p>
+</div>
 </section>
 </section>
 
