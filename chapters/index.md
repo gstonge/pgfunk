@@ -11,6 +11,7 @@ Here we a list a few references that might be of interest in combination with th
 Many theoretical results can be obtained using probability generating functions---critical points of
 phase transition, asymptotic behavior of functions, and the moments of distributions of
 interest to name a few.
+
 Here, our main goal is to provide a hands-on tutorial on *computational* methods based on probability generating functions. Indeed, numerical approximations are often more flexible when trying to to tackle real world scenarios.
 Our main applications will be in epidemiology, on how to characterize contagion on networks or in complex population by this set of tools.
 

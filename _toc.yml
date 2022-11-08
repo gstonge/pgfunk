@@ -17,9 +17,7 @@ parts:
   chapters:
   - file: chapters/branching_process
     title: Branching process
-  - file: chapters/bond_percolation
-    title: Bond percolation
-  #- file: chapters/epidemic_on_networks
-    #title: Epidemic on networks
+  - file: chapters/contagion_on_networks
+    title: Contagion on networks
 
 
