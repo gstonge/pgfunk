@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Branching process &#8212; PGFunk</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Bond percolation" href="bond_percolation.html" />
+    <link rel="prev" title="Multivariate probability generating functions" href="multivariate_pgf.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/clothesline.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PGFunk</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  PGF 101
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pgf_properties.html">
+   Definition and properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="numerical_inversion.html">
+   Numerical inversion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="multivariate_pgf.html">
+   Multivariate PGF
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Branching process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="bond_percolation.html">
+   Bond percolation
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/chapters/branching_process.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapters/branching_process.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#number-of-nodes-at-a-given-generation">
+   Number of nodes at a given generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cumulative-number-of-nodes">
+   Cumulative number of nodes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-of-extinction">
+   Probability of extinction
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Branching process</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#number-of-nodes-at-a-given-generation">
+   Number of nodes at a given generation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cumulative-number-of-nodes">
+   Cumulative number of nodes
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#probability-of-extinction">
+   Probability of extinction
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="branching-process">
+<h1>Branching process<a class="headerlink" href="#branching-process" title="Permalink to this headline">#</a></h1>
+<p>One way to understand and visualize a <a class="reference external" href="https://en.wikipedia.org/wiki/Branching_process">branching process</a> is as a growing tree. The process starts at at time (or generation) <span class="math notranslate nohighlight">\(t = 0\)</span> with <span class="math notranslate nohighlight">\(n_0\)</span> nodes. At time <span class="math notranslate nohighlight">\(t\)</span>, the <span class="math notranslate nohighlight">\(n_t\)</span> <em>parent</em> nodes each generates independently a certain number <span class="math notranslate nohighlight">\(k\)</span> of descendents (<em>child</em> nodes) according to some <em>offspring</em> distribution <span class="math notranslate nohighlight">\(q_k\)</span>. These <span class="math notranslate nohighlight">\(n_{t+1}\)</span> child nodes become the new parent nodes at generation <span class="math notranslate nohighlight">\(t+1\)</span> and the process goes on forever, or until there are no more descendents at the next generation (which corresponds to an <em>extinction</em> event). Below is illustrated an example of a branching process with each node labeled by its generation.</p>
+<p><img alt="branching" src="../_images/branching.png" /></p>
+<p>This growing tree could model various situation: reproduction of bacteria, the spread of surnames, or more closely related to the main subject of this tutorial—the spread of an infectious disease in a population.</p>
+<p>Some questions of interest are:</p>
+<ol class="simple">
+<li><p>What is the number of nodes at time <span class="math notranslate nohighlight">\(t\)</span>?</p></li>
+<li><p>What is the <em>cumulative</em> number of nodes at time <span class="math notranslate nohighlight">\(t\)</span>?</p></li>
+<li><p>What is the probability of extinction given some initial conditions?</p></li>
+</ol>
+<p>Of course, to answer these questions, we will use probability generating functions.</p>
+<section id="number-of-nodes-at-a-given-generation">
+<h2>Number of nodes at a given generation<a class="headerlink" href="#number-of-nodes-at-a-given-generation" title="Permalink to this headline">#</a></h2>
+<p>Let us define <span class="math notranslate nohighlight">\(p_{n_t}\)</span> the probability to have <span class="math notranslate nohighlight">\(n_t\)</span> nodes at time <span class="math notranslate nohighlight">\(t\)</span> and its PGF <span class="math notranslate nohighlight">\(G_t(x) = \sum_{n_t = 0}^\infty p_{n_t} x^{n_t}\)</span>. Let us also define <span class="math notranslate nohighlight">\(Q(x) = \sum_{k = 0}^\infty q_k x^k\)</span> the PGF of the offspring distribution.
+Assuming we have <span class="math notranslate nohighlight">\(n_t\)</span> nodes, each of them will produce <em>independently</em> some number of descendents, so the PGF for the sum of these descendent is simply <span class="math notranslate nohighlight">\(Q(x)^{n_t}\)</span> by the properties of PGF. Since <span class="math notranslate nohighlight">\(n_t\)</span> is also a random variable, we have that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+G_{t+1}(x) &amp;= \sum_{n_t=0}^\infty p_{n_t} Q(x)^{n_t} \;, \\
+           &amp;= G_t(Q(x)) \;.
+\end{align}
+\end{split}\]</div>
+<p>By recursion, we have that</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+G_{t}(x) &amp;= G_0(Q^t(x)) \;,
+\end{align}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(Q^t(x) \equiv \underbrace{Q \circ Q \circ \cdots Q}_{t \text{ times}}\)</span> is the <span class="math notranslate nohighlight">\(t\)</span>-composition of <span class="math notranslate nohighlight">\(Q\)</span> with itself and <span class="math notranslate nohighlight">\(G_0(x)\)</span> represents the initial conditions.</p>
+<p>For instance, let us consider a Poisson distribution <span class="math notranslate nohighlight">\(q_k = \lambda^k e^{-\lambda} / k!\)</span> with PGF <span class="math notranslate nohighlight">\(Q(x) = e^{\lambda (x - 1)}\)</span> with <span class="math notranslate nohighlight">\(\lambda = 2\)</span>, and let us assume initially there were 5 nodes, i.e., <span class="math notranslate nohighlight">\(G_0(x) = x^{5}\)</span>. Below we compute and illustrate the distribution for the number of nodes at certain generations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">G0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">tset</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">tset</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tset</span><span class="p">:</span>
+        <span class="n">pn</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">G0</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$t = </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of nodes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/branching_process_13_0.png" src="../_images/branching_process_13_0.png" />
+</div>
+</div>
+<p>At each generation, the mean of the distribution increases by a factor <span class="math notranslate nohighlight">\(\lambda = 2\)</span> and the distribution gets broader due to the stochasticity.</p>
+</section>
+<section id="cumulative-number-of-nodes">
+<h2>Cumulative number of nodes<a class="headerlink" href="#cumulative-number-of-nodes" title="Permalink to this headline">#</a></h2>
+<p>Sometimes, we care more about total size of the tree; for an epidemic process, it would be the total size of the outbreak.
+To characterize, <span class="math notranslate nohighlight">\(m_t\)</span>, the cumulative number of node at time <span class="math notranslate nohighlight">\(t\)</span>, we need to consider the joint distribution <span class="math notranslate nohighlight">\(p_{n_t,m_t}\)</span> with bivariate PGF</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+G_{t}(x,y)  &amp;= \sum_{n_t=0}^\infty \sum_{m_t=0}^\infty p_{n_t,m_t} x^{n_t}y^{m_t} \;.
+\end{align}
+\]</div>
+<p>The PGF <span class="math notranslate nohighlight">\(G_t(x,y)\)</span> follows a very similar update pattern as <span class="math notranslate nohighlight">\(G_t(x)\)</span>. In fact, if we take any node at generation <span class="math notranslate nohighlight">\(t\)</span>, the number of descendent <em>and</em> the cumulative number of node it produces is the same, therefore, its PGF is <span class="math notranslate nohighlight">\(Q(xy)\)</span>. So the PGF for the sum of descendent and cumulative number of nodes produced at generation <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(Q(xy)^{n_t}\)</span>. Therefore, we have</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+G_{t+1}(x,y)  &amp;= \sum_{n_{t}=0}^\infty \sum_{m_{t}=0}^\infty p_{n_{t},m_{t}} Q(xy)^{n_{t}}y^{m_{t}} \;, \\
+G_{t+1}(x,y)  &amp;= G_t(Q(xy),y) \;.
+\end{align}
+\end{split}\]</div>
+<p>Now we could extract the joint distribution <span class="math notranslate nohighlight">\(p_{n_t,m_t}\)</span> from this bivariate PGF, but if we only care about the cumulative number of node, we can marginalize on <span class="math notranslate nohighlight">\(n_t\)</span> by replacing <span class="math notranslate nohighlight">\(x \mapsto 1\)</span> in the previous equation. Indeed, replacing a variable by 1 in a PGF is equivalent to marginalize over the underlying quantity it represents (here <span class="math notranslate nohighlight">\(n_t\)</span>). Similarly, if we substitute <span class="math notranslate nohighlight">\(y \mapsto 1\)</span> in the equation for <span class="math notranslate nohighlight">\(G_{t+1}(x,y)\)</span>, we recover the previous recursion for <span class="math notranslate nohighlight">\(G_{t+1}(x)\)</span>, since we marginalize over <span class="math notranslate nohighlight">\(m_t\)</span>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The initial conditions are now specified by the PGF <span class="math notranslate nohighlight">\(G_0(x,y)\)</span>. With 5 nodes at <span class="math notranslate nohighlight">\(t = 0\)</span>, this implies <span class="math notranslate nohighlight">\(G_0(x,y) = x^5y^5\)</span>.</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">G0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span><span class="o">*</span><span class="n">y</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">400</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">tset</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">tset</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tset</span><span class="p">:</span>
+        <span class="n">pn</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">G0</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$t = </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of nodes&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/branching_process_22_0.png" src="../_images/branching_process_22_0.png" />
+</div>
+</div>
+</section>
+<section id="probability-of-extinction">
+<h2>Probability of extinction<a class="headerlink" href="#probability-of-extinction" title="Permalink to this headline">#</a></h2>
+<p>Given some initial conditions specified by <span class="math notranslate nohighlight">\(G_0(x)\)</span> and an offspring PGF <span class="math notranslate nohighlight">\(Q(x)\)</span> (or <span class="math notranslate nohighlight">\(G_0(x,y)\)</span> and <span class="math notranslate nohighlight">\(Q(xy)\)</span>), we want to know the probability that the process will go extinct. Since all nodes generate descendents independently, we can ask the simpler question: What is the probability <span class="math notranslate nohighlight">\(u\)</span> that a node has a finite number of descendents. Assuming this is the case, since all descendents also generate child nodes indepdently, it must be that all descendent also have a finite number of descendent, with probability <span class="math notranslate nohighlight">\(u\)</span>. Since the number of descendent is given by the distribution <span class="math notranslate nohighlight">\(q_k\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+u &amp;= \sum_k q_k u^k \;, \\
+  &amp;= Q(u) \;.
+\end{align}
+\end{split}\]</div>
+<p>One can see that <span class="math notranslate nohighlight">\(u = 1\)</span> is always a solution of this equation, but sometime there is another solution <span class="math notranslate nohighlight">\(u &lt; 1\)</span>.
+When this is the case, then the probability of extinction is simply the probability that all initial nodes have a finite number of descendent, thus <span class="math notranslate nohighlight">\(G_0(u)\)</span>, which is also smaller than 1.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="multivariate_pgf.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Multivariate probability generating functions</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="bond_percolation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Bond percolation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Antoine Allard, Laurent Hébert-Dufresne, Guillaume St-Onge<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
