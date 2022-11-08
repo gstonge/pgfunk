@@ -1,6 +1,6 @@
 # Probability generating functions for computational epidemiology
 
-Probability generating functions are very extremely useful to characterize complex combinatorial
+Probability generating functions are extremely useful to characterize complex combinatorial
 objects which arise in various fields, such as graph theory or the study of epidemiological
 processes.
 
