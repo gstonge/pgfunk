@@ -141,8 +141,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="bond_percolation.html">
-   Bond percolation
+  <a class="reference internal" href="contagion_on_networks.html">
+   Contagion on networks
   </a>
  </li>
 </ul>
@@ -307,8 +307,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#throwing-dices-of-different-colors">
-   Throwing dices of different colors
+  <a class="reference internal nav-link" href="#throwing-dice-of-different-colors">
+   Throwing dice of different colors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -336,8 +336,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#throwing-dices-of-different-colors">
-   Throwing dices of different colors
+  <a class="reference internal nav-link" href="#throwing-dice-of-different-colors">
+   Throwing dice of different colors
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -366,16 +366,16 @@ G(x_1,x_2,\dots,x_m) = \sum_{n_1 = 0}^\infty \cdots \sum_{n_m = 0}^\infty p_{n_1
 \]</div>
 <p>where <span class="math notranslate nohighlight">\(p_{n_1,n_2,\dots,n_m}\)</span> is the joint probability distribution.</p>
 <p>Fortunately, all the properties we discussed previously and the numerical inversion can still be applied.</p>
-<section id="throwing-dices-of-different-colors">
-<h2>Throwing dices of different colors<a class="headerlink" href="#throwing-dices-of-different-colors" title="Permalink to this headline">#</a></h2>
-<p>Let’s assume we throw three fair dices. Two of the three dices are blue and one is red. We calculate two sums (<span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>) by adding the number on top of the blue dice with the two number on top of the red dices independently. What is the PGF for <span class="math notranslate nohighlight">\(p_{n_1,n_2}\)</span>? It is</p>
+<section id="throwing-dice-of-different-colors">
+<h2>Throwing dice of different colors<a class="headerlink" href="#throwing-dice-of-different-colors" title="Permalink to this headline">#</a></h2>
+<p>Let’s assume we throw three fair dice. Two of the three are blue and one is red. We calculate two sums (<span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>) by adding the number on top of the blue die with the two number on top of the red dice independently. What is the PGF for <span class="math notranslate nohighlight">\(p_{n_1,n_2}\)</span>? It is</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
 G(x_1,x_2) = g(x_1) g(x_2)g(x_1x_2) \;.
 \end{align}
 \]</div>
-<p>Indeed, if <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> are the number on top of the red dices, and <span class="math notranslate nohighlight">\(k_3\)</span> is the result on top of the blue dice,</p>
+<p>Indeed, if <span class="math notranslate nohighlight">\(k_1\)</span> and <span class="math notranslate nohighlight">\(k_2\)</span> are the number on top of the red dice, and <span class="math notranslate nohighlight">\(k_3\)</span> is the result on top of the blue die,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}

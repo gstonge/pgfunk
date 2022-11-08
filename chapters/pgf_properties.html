@@ -141,8 +141,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="bond_percolation.html">
-   Bond percolation
+  <a class="reference internal" href="contagion_on_networks.html">
+   Contagion on networks
   </a>
  </li>
 </ul>
@@ -307,8 +307,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-simple-example-rolling-dices">
-   A simple example: Rolling dices
+  <a class="reference internal nav-link" href="#a-simple-example-rolling-dice">
+   A simple example: Rolling dice
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -341,8 +341,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#a-simple-example-rolling-dices">
-   A simple example: Rolling dices
+  <a class="reference internal nav-link" href="#a-simple-example-rolling-dice">
+   A simple example: Rolling dice
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -380,16 +380,16 @@ G(x) = \sum_{n = 0}^\infty p_n x^n \;.
 <p>As we show in the next chapter, it is straightforward to recover the probability distribution from its PGF.
 But why work with the latter?
 Mainly because for certain applications, it is possible to find an analytical expression for the PGF, or define an algorithm solving it, while it is much more complicated (or impossible) to have an explicit formula (or an algorithm) for the probability distribution directly.</p>
-<section id="a-simple-example-rolling-dices">
-<h2>A simple example: Rolling dices<a class="headerlink" href="#a-simple-example-rolling-dices" title="Permalink to this headline">#</a></h2>
-<p>Throughout this first part of the book, we will often use this simple example—rolling a certain number of six-sided dices, then try to estimate the probability of some event.
-With a single dice for instance, the possible outcomes are quite simple: <span class="math notranslate nohighlight">\(n \in \lbrace 1, 2, 3, 4, 5, 6 \rbrace\)</span>, all with equal probability <span class="math notranslate nohighlight">\(p_n = 1/6\)</span>.
+<section id="a-simple-example-rolling-dice">
+<h2>A simple example: Rolling dice<a class="headerlink" href="#a-simple-example-rolling-dice" title="Permalink to this headline">#</a></h2>
+<p>Throughout this first part of the book, we will often use this simple example—rolling a certain number of six-sided dice, then try to estimate the probability of some event.
+With a single die for instance, the possible outcomes are quite simple: <span class="math notranslate nohighlight">\(n \in \lbrace 1, 2, 3, 4, 5, 6 \rbrace\)</span>, all with equal probability <span class="math notranslate nohighlight">\(p_n = 1/6\)</span>.
 The corresponding PGF is simply</p>
 <div class="math notranslate nohighlight">
 \[
 g(x) = \frac{1}{6}(x + x^2 + x^3 + x^4 + x^5 + x^6) = \sum_{n=1}^6 \frac{1}{6} x^n \;.
 \]</div>
-<p>But now what happens when we use more than one dice?
+<p>But now what happens when we use more multiple dice?
 What is now the probability to observe a certain result, such as <span class="math notranslate nohighlight">\(n = 8\)</span>?
 To answer these questions, let us highlight some important properties of PGFs.</p>
 </section>

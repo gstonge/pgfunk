@@ -141,8 +141,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="bond_percolation.html">
-   Bond percolation
+  <a class="reference internal" href="contagion_on_networks.html">
+   Contagion on networks
   </a>
  </li>
 </ul>
@@ -358,7 +358,7 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="inverting-probability-generating-functions">
 <h1>Inverting probability generating functions<a class="headerlink" href="#inverting-probability-generating-functions" title="Permalink to this headline">#</a></h1>
 <p>In most cases of interest, the PGF <span class="math notranslate nohighlight">\(G(x)\)</span> is known <em>indirectly</em>, i.e., we know how to compute its value for any <span class="math notranslate nohighlight">\(x\)</span>, but we do not know the underlying coefficients.
-For instance, the PGF for the result of a roll of two six-sided dices is <span class="math notranslate nohighlight">\(G(x) = g(x)^2\)</span>, where</p>
+For instance, the PGF for the result of a roll of two six-sided dice is <span class="math notranslate nohighlight">\(G(x) = g(x)^2\)</span>, where</p>
 <div class="math notranslate nohighlight">
 \[
 g(x) = \sum_{n = 1}^6 \frac{1}{6} x^n
@@ -389,7 +389,7 @@ p_n = \frac{1}{2\pi r^n}\int_{0}^{2\pi} G\left ( r e^{ i \omega} \right) e^{- i 
 p_n = \frac{1}{N r^n} \sum_{m = 0}^{N-1} G(r e^{2 \pi i m /N}) e^{2 \pi i n m /N} \;.
 \]</div>
 <p>Again, one can verify that this is true by expanding <span class="math notranslate nohighlight">\(G(e^{2\pi i m /N})\)</span> into a power series and noting that only the <span class="math notranslate nohighlight">\(n\)</span>-th degree term is nonzero.
-Let us apply this technique to recover the distribution for the roll of two six-sided dices.
+Let us apply this technique to recover the distribution for the roll of two six-sided dice.
 For the sake of simplicity, let us use <span class="math notranslate nohighlight">\(r = 1\)</span> for now.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -409,7 +409,7 @@ For the sake of simplicity, let us use <span class="math notranslate nohighlight
 <span class="n">pn</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dice&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -433,7 +433,7 @@ To find out, let us use <span class="math notranslate nohighlight">\(N = 10\)</s
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">n_</span><span class="p">,</span><span class="n">pn_</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dice&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -459,7 +459,7 @@ In this case, we can use a value <span class="math notranslate nohighlight">\(0 
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">n_</span><span class="p">,</span><span class="n">pn_</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dices&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dice&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
