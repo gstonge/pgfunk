@@ -1,2 +1,2 @@
 # pgfunk
-A collection of Jupyter notebooks about Probability Generating Functions (PGFs) and their applications
+A collection of Jupyter notebooks about Probability Generating Functions (PGFs) and their applications for epidemic modeling.

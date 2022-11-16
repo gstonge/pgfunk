@@ -26,20 +26,20 @@ sphinx:
 
 # Information about where the book exists on the web --- uncomment the repository and launch for binder
 
-#repository:
-  #url: https://github.com/gstonge/pgfunk # Online location of your book
-  #branch: "main"
+repository:
+  url: https://github.com/gstonge/pgfunk
+  branch: "main"
 
-#launch_buttons:
-  #binderhub_url: "https://mybinder.org"
-  #notebook_interface: "jupyterlab"
+launch_buttons:
+  binderhub_url: "https://mybinder.org"
+  notebook_interface: "jupyterlab"
 
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
   use_edit_page_button: false
   use_issues_button: false
-  use_repository_button: false #turn to true to show github repo
+  use_repository_button: true #turn to true to show github repo
   home_page_in_navbar: false
 
 
