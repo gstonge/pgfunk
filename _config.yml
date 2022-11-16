@@ -3,7 +3,7 @@
 
 title: PGFunk
 author: Antoine Allard, Laurent Hébert-Dufresne, Guillaume St-Onge
-logo: "./assets/png/clothesline.png"
+logo: "logo.png"
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html

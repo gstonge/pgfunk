@@ -20,4 +20,11 @@ parts:
   - file: chapters/contagion_on_networks
     title: Contagion on networks
 
+- caption: Exercises
+  chapters:
+  - file: chapters/exercise_dice
+    title: "Part I: throwing dice"
+  - file: chapters/exercise_branching_process
+    title: "Part II: branching process"
+
 
