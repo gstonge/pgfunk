@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Contagion on networks &#8212; PGFunk</title>
+    <title>Exercises part I: throwing dice &#8212; PGFunk</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exercises part I: throwing dice" href="exercise_dice.html" />
-    <link rel="prev" title="Branching process" href="branching_process.html" />
+    <link rel="next" title="Exercises part II: branching process" href="exercise_branching_process.html" />
+    <link rel="prev" title="Contagion on networks" href="contagion_on_networks.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -132,14 +134,14 @@ const thebe_selector_output = ".output, .cell_output"
   Applications
  </span>
 </p>
-<ul class="current nav bd-sidenav">
+<ul class="nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="branching_process.html">
    Branching process
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="contagion_on_networks.html">
    Contagion on networks
   </a>
  </li>
@@ -149,9 +151,9 @@ const thebe_selector_output = ".output, .cell_output"
   Exercises
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="exercise_dice.html">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Part I: throwing dice
   </a>
  </li>
@@ -219,7 +221,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/chapters/contagion_on_networks.ipynb"
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/chapters/exercise_dice.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -262,7 +264,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapters/contagion_on_networks.ipynb"
+        <a href="../_sources/chapters/exercise_dice.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -299,23 +301,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-the-right-support-and-avoiding-aliasing">
+   Choosing the right support and avoiding aliasing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-complex-scenarios">
+   More complex scenarios
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Contagion on networks</h1>
+                <h1>Exercises part I: throwing dice</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#choosing-the-right-support-and-avoiding-aliasing">
+   Choosing the right support and avoiding aliasing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#more-complex-scenarios">
+   More complex scenarios
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -323,8 +372,51 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="contagion-on-networks">
-<h1>Contagion on networks<a class="headerlink" href="#contagion-on-networks" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="exercises-part-i-throwing-dice">
+<h1>Exercises part I: throwing dice<a class="headerlink" href="#exercises-part-i-throwing-dice" title="Permalink to this headline">#</a></h1>
+<p>The code below extract the probability distribution for the roll of two dice. It will serve as a basis for the following exercise.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;ggplot&#39;</span><span class="p">,</span> <span class="s1">&#39;seaborn-talk&#39;</span><span class="p">])</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="mf">1.</span>
+<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="mi">6</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)])</span>
+<span class="n">G</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+<span class="n">pn</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="n">n</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dice&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/exercise_dice_2_0.png" src="../_images/exercise_dice_2_0.png" />
+</div>
+</div>
+<section id="choosing-the-right-support-and-avoiding-aliasing">
+<h2>Choosing the right support and avoiding aliasing<a class="headerlink" href="#choosing-the-right-support-and-avoiding-aliasing" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Change the value of <span class="math notranslate nohighlight">\(N\)</span>, first pick N &gt; 13, then <span class="math notranslate nohighlight">\(N &lt; 13\)</span>. What do you notice?</p></li>
+<li><p><span class="math notranslate nohighlight">\(n \in \{0,1,\dots,N-1\}\)</span> is the support of your probability distribution. When <span class="math notranslate nohighlight">\(N-1\)</span> is below 12, we have aliasing. Fix <span class="math notranslate nohighlight">\(N = 10\)</span> and now vary <span class="math notranslate nohighlight">\(r\)</span> between 0 and 1. What happens?</p></li>
+<li><p>Instead of rolling two dice, now get the probability distribution for the sum of 3 dice. Repeat for more dice (5,10,20). What is the shape of the resulting probability distribution?</p></li>
+</ol>
+</section>
+<section id="more-complex-scenarios">
+<h2>More complex scenarios<a class="headerlink" href="#more-complex-scenarios" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p>Get the probability distribution for the sum of a six-sided die and a twelve-sided die.</p></li>
+<li><p>You have dice of a very weird shape. The PGF for the roll of a single die is <span class="math notranslate nohighlight">\(g(x) = e^{x-1}\)</span>. Extract the probability distribution and make sure you eliminate aliasing effects. Do the same using two dice.</p></li>
+<li><p>You have 5 six-sided dice: two blue and three red. What is the probability that the sum of the blue dice is higher than the sum of the red dice?</p></li>
+<li><p>You roll a first six-sided die, then depending on the number you get, you roll this number of (six-sided) dice and calculate the sum. What is the probability distribution of the sum?</p></li>
+</ol>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -354,17 +446,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="branching_process.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="contagion_on_networks.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Branching process</p>
+            <p class="prev-next-title">Contagion on networks</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="exercise_dice.html" title="next page">
+    <a class='right-next' id="next-link" href="exercise_branching_process.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exercises part I: throwing dice</p>
+        <p class="prev-next-title">Exercises part II: branching process</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

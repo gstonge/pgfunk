@@ -96,7 +96,7 @@ const thebe_selector_output = ".output, .cell_output"
         
       
       
-      <img src="../_static/clothesline.png" class="logo" alt="logo">
+      <img src="../_static/logo.png" class="logo" alt="logo">
       
       
       <h1 class="site-logo" id="site-title">PGFunk</h1>
@@ -143,6 +143,23 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1">
   <a class="reference internal" href="contagion_on_networks.html">
    Contagion on networks
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="exercise_dice.html">
+   Part I: throwing dice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="exercise_branching_process.html">
+   Part II: branching process
   </a>
  </li>
 </ul>
@@ -401,6 +418,7 @@ G_{t}(x) &amp;= G_0(Q^t(x)) \;,
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;ggplot&#39;</span><span class="p">,</span> <span class="s1">&#39;seaborn-talk&#39;</span><span class="p">])</span>
 
 <span class="n">Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 <span class="n">G0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span>
@@ -482,7 +500,7 @@ G_{t+1}(x,y)  &amp;= G_t(Q(xy),y) \;.
 </section>
 <section id="probability-of-extinction">
 <h2>Probability of extinction<a class="headerlink" href="#probability-of-extinction" title="Permalink to this headline">#</a></h2>
-<p>Given some initial conditions specified by <span class="math notranslate nohighlight">\(G_0(x)\)</span> and an offspring PGF <span class="math notranslate nohighlight">\(Q(x)\)</span> (or <span class="math notranslate nohighlight">\(G_0(x,y)\)</span> and <span class="math notranslate nohighlight">\(Q(xy)\)</span>), we want to know the probability that the process will go extinct. Since all nodes generate descendents independently, we can ask the simpler question: What is the probability <span class="math notranslate nohighlight">\(u\)</span> that a node has a finite number of descendents. Assuming this is the case, since all descendents also generate child nodes indepdently, it must be that all descendent also have a finite number of descendent, with probability <span class="math notranslate nohighlight">\(u\)</span>. Since the number of descendent is given by the distribution <span class="math notranslate nohighlight">\(q_k\)</span>,</p>
+<p>Given some initial conditions specified by <span class="math notranslate nohighlight">\(G_0(x)\)</span> and an offspring PGF <span class="math notranslate nohighlight">\(Q(x)\)</span> (or <span class="math notranslate nohighlight">\(G_0(x,y)\)</span> and <span class="math notranslate nohighlight">\(Q(xy)\)</span>), we want to know the probability that the process will go extinct. Since all nodes generate descendents independently, we can ask the simpler question: What is the probability <span class="math notranslate nohighlight">\(u\)</span> that a node has a finite number of descendents. Assuming this is the case, since all descendents also generate child nodes independently, it must be that all descendent also have a finite number of descendent, with probability <span class="math notranslate nohighlight">\(u\)</span>. Since the number of descendent is given by the distribution <span class="math notranslate nohighlight">\(q_k\)</span>,</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -524,7 +542,7 @@ The probability of extinction is then simply the probability that all initial no
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>When solving this type of self-consistent equation and scanning a paramater (here <span class="math notranslate nohighlight">\(\lambda\)</span>) it is useful to reuse the result from the previous value of <span class="math notranslate nohighlight">\(\lambda\)</span> to solve for the next one (it saves lots of computation). Here, it is better to start at the end (large <span class="math notranslate nohighlight">\(\lambda\)</span>) to avoid numerical issues—one is invited to try it the other way around and see what happens.</p>
+<p>When solving this type of self-consistent equation and scanning a paramater (here <span class="math notranslate nohighlight">\(\lambda\)</span>) it is useful to reuse the result from the previous value of <span class="math notranslate nohighlight">\(\lambda\)</span> to solve for the next one (it saves a lot of computation). Here, it is better to start at the end (large <span class="math notranslate nohighlight">\(\lambda\)</span>) to avoid numerical issues—one is invited to try it the other way around and see what happens.</p>
 </div>
 </section>
 </section>
