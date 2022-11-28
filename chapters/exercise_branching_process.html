@@ -427,14 +427,15 @@ title="Print to PDF"
 <section id="modeling-overdispersion">
 <h2>Modeling overdispersion<a class="headerlink" href="#modeling-overdispersion" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
-<li><p>Change the offspring distribution to a negative binomial, using the PGF
-$<span class="math notranslate nohighlight">\(
+<li><p>Change the offspring distribution to a negative binomial, using the PGF</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
 \begin{align}
 Q(x) = \left [1 + \frac{R}{\kappa}(1-x) \right]^{-\kappa} \;.
 \end{align}
-\)</span><span class="math notranslate nohighlight">\(
-Use different values of \)</span>\kappa &gt; 0$ and see what happens.</p></li>
-</ol>
+\]</div>
+<p>Use different values of <span class="math notranslate nohighlight">\(\kappa &gt; 0\)</span> and see what happens.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Remember to adapt the support to avoid aliasing effects.</p>
