@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Exercises part I: throwing dice &#8212; PGFunk</title>
+    <title>Exercises part III: statistical inference &#8212; PGFunk</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exercises part II: branching process" href="exercise_branching_process.html" />
-    <link rel="prev" title="Contagion on networks" href="contagion_on_networks.html" />
+    <link rel="prev" title="Exercises part II: branching process" href="exercise_branching_process.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -152,8 +151,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="exercise_dice.html">
    Part I: throwing dice
   </a>
  </li>
@@ -162,8 +161,8 @@ const thebe_selector_output = ".output, .cell_output"
    Part II: branching process
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="exercise_inference.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Part III: statistical inference
   </a>
  </li>
@@ -226,7 +225,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/gstonge/pgfunk/main?urlpath=lab/tree/chapters/exercise_dice.ipynb"
+        <a href="https://mybinder.org/v2/gh/gstonge/pgfunk/main?urlpath=lab/tree/chapters/exercise_inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -282,7 +281,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/chapters/exercise_dice.ipynb"
+        <a href="../_sources/chapters/exercise_inference.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -342,13 +341,8 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-the-right-support-and-avoiding-aliasing">
-   Choosing the right support and avoiding aliasing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-complex-scenarios">
-   More complex scenarios
+  <a class="reference internal nav-link" href="#posterior-distribution-on-the-reproduction-number">
+   Posterior distribution on the reproduction number
   </a>
  </li>
 </ul>
@@ -360,7 +354,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Exercises part I: throwing dice</h1>
+                <h1>Exercises part III: statistical inference</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -371,13 +365,8 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#choosing-the-right-support-and-avoiding-aliasing">
-   Choosing the right support and avoiding aliasing
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#more-complex-scenarios">
-   More complex scenarios
+  <a class="reference internal nav-link" href="#posterior-distribution-on-the-reproduction-number">
+   Posterior distribution on the reproduction number
   </a>
  </li>
 </ul>
@@ -390,53 +379,119 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="exercises-part-i-throwing-dice">
-<h1>Exercises part I: throwing dice<a class="headerlink" href="#exercises-part-i-throwing-dice" title="Permalink to this headline">#</a></h1>
-<p>The code below extract the probability distribution for the roll of two dice. It will serve as a basis for the following exercise.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="exercises-part-iii-statistical-inference">
+<h1>Exercises part III: statistical inference<a class="headerlink" href="#exercises-part-iii-statistical-inference" title="Permalink to this headline">#</a></h1>
+<p>The code below extract the probability distribution for the number of nodes at a few time points for a branching process with a Poisson offspring distribution.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;ggplot&#39;</span><span class="p">,</span> <span class="s1">&#39;seaborn-talk&#39;</span><span class="p">])</span>
 
-<span class="n">r</span> <span class="o">=</span> <span class="mf">1.</span>
-<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">x</span><span class="o">**</span><span class="n">n</span><span class="o">/</span><span class="mi">6</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">7</span><span class="p">)])</span>
-<span class="n">G</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span>
-<span class="n">G</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vectorize</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">R</span> <span class="o">=</span> <span class="mf">2.</span>
+<span class="n">Q</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">R</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">G0</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">5</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">200</span>
 <span class="n">n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">r</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
-<span class="n">pn</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">G</span><span class="p">(</span><span class="n">c</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">N</span><span class="o">*</span><span class="n">r</span><span class="o">**</span><span class="n">n</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+
+<span class="n">tset</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">tset</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tset</span><span class="p">:</span>
+        <span class="n">pn</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">G0</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="n">N</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">pn</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">fr</span><span class="s2">&quot;$t = </span><span class="si">{</span><span class="n">t</span><span class="si">}</span><span class="s2">$&quot;</span><span class="p">)</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">Q</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Roll on two six-sided dice&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of nodes&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/exercise_dice_2_0.png" src="../_images/exercise_dice_2_0.png" />
+<img alt="../_images/exercise_inference_2_0.png" src="../_images/exercise_inference_2_0.png" />
 </div>
 </div>
-<section id="choosing-the-right-support-and-avoiding-aliasing">
-<h2>Choosing the right support and avoiding aliasing<a class="headerlink" href="#choosing-the-right-support-and-avoiding-aliasing" title="Permalink to this headline">#</a></h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Remember to adapt the support to avoid aliasing effects.</p>
+</div>
+<section id="posterior-distribution-on-the-reproduction-number">
+<h2>Posterior distribution on the reproduction number<a class="headerlink" href="#posterior-distribution-on-the-reproduction-number" title="Permalink to this headline">#</a></h2>
+<p>Let us assume that we have an emerging outbreak. To simplify the situation, let us assume that the generation time is always a week, and infectious individuals generate a number of secondary case according to a Poisson distribution with PGF of the form</p>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+Q(x) = e^{R(x-1)}\;.
+\end{align}
+\]</div>
+<p>We can model this situation using a branching process, and we want to infer <span class="math notranslate nohighlight">\(R\)</span>, the reproduction number.</p>
 <ol class="simple">
-<li><p>Change the value of <span class="math notranslate nohighlight">\(N\)</span>, first pick N &gt; 13, then <span class="math notranslate nohighlight">\(N &lt; 13\)</span>. What do you notice?</p></li>
-<li><p><span class="math notranslate nohighlight">\(n \in \{0,1,\dots,N-1\}\)</span> is the support of your probability distribution. When <span class="math notranslate nohighlight">\(N-1\)</span> is below 12, we have aliasing. Fix <span class="math notranslate nohighlight">\(N = 10\)</span> and now vary <span class="math notranslate nohighlight">\(r\)</span> between 0 and 1. What happens?</p></li>
-<li><p>Instead of rolling two dice, now get the probability distribution for the sum of 3 dice. Repeat for more dice (5,10,20). What is the shape of the resulting probability distribution?</p></li>
+<li><p>Run the code below to get a time series—this will represent the data available.</p></li>
 </ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">secret_code</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1">#length of the time series</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">poisson_branching_process</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Time $t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;New cases&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/exercise_inference_9_0.png" src="../_images/exercise_inference_9_0.png" />
+</div>
+</div>
+<ol class="simple">
+<li><p>Reusing the code above for the PGF, estimate the posterior distribution on <span class="math notranslate nohighlight">\(R\)</span>.</p></li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As a first step, use only the first and last data points, <span class="math notranslate nohighlight">\(n_0 = 1\)</span> and <span class="math notranslate nohighlight">\(n_T\)</span>. You have that <span class="math notranslate nohighlight">\(G_0(x) = x^{n_0}\)</span>, and you can calculate <span class="math notranslate nohighlight">\(G_T(x)\)</span> (and the associated probability distribution) from the recursion implemented in the code above.</p>
+<p>The posterior distribution is <span class="math notranslate nohighlight">\(P(R|n_0,n_T) \propto P(n_T| n_0, R) P(n_0,R)\)</span>.
+We could choose different prior distribution, but right now let us use <span class="math notranslate nohighlight">\(P(n_0,R) = \mathrm{cte}\)</span>.</p>
+<p>Since the likelihood <span class="math notranslate nohighlight">\(P(n_T| n_0, R)\)</span> is generated by <span class="math notranslate nohighlight">\(G_T(x)\)</span>, we can evaluate the posterior distribution for a few values of <span class="math notranslate nohighlight">\(R\)</span> on an interval and plot the resulting curve.</p>
+</div>
+<ol class="simple">
+<li><p>To make it a bit more realistic, apply your code to the following time series, where only a certain fraction of the cases are detected.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">secret_code</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">12</span> <span class="c1">#length of the time series</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">poisson_branching_process_with_noise</span><span class="p">(</span><span class="n">T</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Time $t$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;New cases&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/exercise_inference_13_0.png" src="../_images/exercise_inference_13_0.png" />
+</div>
+</div>
+<ol class="simple">
+<li><p>Try using more data points and breaking down the likelihood in a product (see below). Is the inference better?</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[
+\begin{align}
+\prod_{j=1}^{T/\tau} P\left(n_{j\tau}|n_{(j-1)\tau}, R\right) \;.
+\end{align}
+\]</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>When adding more dice, the support of your distribution change, adapt <span class="math notranslate nohighlight">\(N\)</span>.</p>
+<p>In the limit <span class="math notranslate nohighlight">\(\tau = 1\)</span>, one could argue (successfully) that PGFs are not necessary here. Indeed, <span class="math notranslate nohighlight">\(P(n_{t}|n_{t-1},R)\)</span> is a Poisson distribution by the additive property of Poisson random variables. While this is true in this very simple exercise, realistic situations will lead to a much more complex likelihood which either require PGFs, or an approximation scheme making use of simulation like <a class="reference external" href="https://en.wikipedia.org/wiki/Approximate_Bayesian_computation">approximate Bayesian computation (ABC)</a>.</p>
 </div>
-</section>
-<section id="more-complex-scenarios">
-<h2>More complex scenarios<a class="headerlink" href="#more-complex-scenarios" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
-<li><p>Get the probability distribution for the sum of a six-sided die and a twelve-sided die.</p></li>
-<li><p>You have dice of a very weird shape. The PGF for the roll of a single die is <span class="math notranslate nohighlight">\(g(x) = e^{x-1}\)</span>. Extract the probability distribution and make sure you eliminate aliasing effects. Do the same using two dice.</p></li>
-<li><p>You first roll a six-sided die, then depending on the number you get, you roll this number of (six-sided) dice and calculate the sum. What is the probability distribution of the sum?</p></li>
-</ol>
 </section>
 </section>
 
@@ -467,19 +522,12 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="contagion_on_networks.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="exercise_branching_process.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Contagion on networks</p>
+            <p class="prev-next-title">Exercises part II: branching process</p>
         </div>
-    </a>
-    <a class='right-next' id="next-link" href="exercise_branching_process.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exercises part II: branching process</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
