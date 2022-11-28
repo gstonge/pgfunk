@@ -26,5 +26,7 @@ parts:
     title: "Part I: throwing dice"
   - file: chapters/exercise_branching_process
     title: "Part II: branching process"
+  - file: chapters/exercise_inference
+    title: "Part III: statistical inference"
 
 
