@@ -426,23 +426,18 @@ title="Print to PDF"
 </div>
 <section id="modeling-overdispersion">
 <h2>Modeling overdispersion<a class="headerlink" href="#modeling-overdispersion" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
-<li><p>Change the offspring distribution to a negative binomial, using the PGF</p></li>
-</ol>
+<p>Change the offspring distribution to a negative binomial, using the PGF</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
 Q(x) = \left [1 + \frac{R}{\kappa}(1-x) \right]^{-\kappa} \;.
 \end{align}
 \]</div>
-<p>Use different values of <span class="math notranslate nohighlight">\(\kappa &gt; 0\)</span> and see what happens.</p>
+<p>Use different values of <span class="math notranslate nohighlight">\(\kappa &gt; 0\)</span> and see what happens. Take a very large value of <span class="math notranslate nohighlight">\(\kappa\)</span> and compare with the Poisson case.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>Remember to adapt the support to avoid aliasing effects.</p>
 </div>
-<ol class="simple">
-<li><p>Take a very large value of <span class="math notranslate nohighlight">\(\kappa\)</span> and compare with the Poisson case.</p></li>
-</ol>
 </section>
 <section id="probability-of-extinction">
 <h2>Probability of extinction<a class="headerlink" href="#probability-of-extinction" title="Permalink to this headline">#</a></h2>
