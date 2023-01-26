@@ -356,6 +356,11 @@ title="Print to PDF"
    A variable number of random variables
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-ahead">
+   Looking ahead
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -390,6 +395,11 @@ title="Print to PDF"
    A variable number of random variables
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#looking-ahead">
+   Looking ahead
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -410,27 +420,41 @@ Population dynamics, genetic evolution, and epidemiology are only a few of the m
 \[
 G(x) = \sum_{n = 0}^\infty p_n x^n \;.
 \]</div>
-<p>Probability generating functions encode the distribution into a function, attaching each number <span class="math notranslate nohighlight">\(p_n\)</span> to a monomial <span class="math notranslate nohighlight">\(x^n\)</span>, or in the words of Herbert S. Wilf, “A generating function is a clothesline on which we hang up a sequence of numbers for display.” <span id="id1">[<a class="reference internal" href="index.html#id4" title="Herbert S. Wilf. generatingfunctionology. CRC press, 2005.">Wilf, 2005</a>]</span>.</p>
+<p>Simple polynomials whose coefficients are all positive since they correspond to probabilities and whose value <span class="math notranslate nohighlight">\(G(1)=1\)</span> since the probabilities are normalized. Probability generating functions encode the distribution into a function, attaching each number <span class="math notranslate nohighlight">\(p_n\)</span> to a monomial <span class="math notranslate nohighlight">\(x^n\)</span>, or in the words of Herbert S. Wilf, “A generating function is a clothesline on which we hang up a sequence of numbers for display.” <span id="id1">[<a class="reference internal" href="index.html#id4" title="Herbert S. Wilf. generatingfunctionology. CRC press, 2005.">Wilf, 2005</a>]</span>.</p>
 <p><img alt="clothesline" src="../_images/clothesline.png" /></p>
-<p>As we show in the next chapter, it is straightforward to recover the probability distribution from its PGF.
+<p>For the more computationally minded readers, it might be easier to think of PGFs as mathematical data structure. In a code, you would likely hold the discrete distribution <span class="math notranslate nohighlight">\(p_n\)</span> of outcomes <span class="math notranslate nohighlight">\(n\)</span> in something like an array or a dictionary with keys <span class="math notranslate nohighlight">\(\lbrace n\rbrace\)</span> and values <span class="math notranslate nohighlight">\(\lbrace p_n\rbrace\)</span>. Mathematically, we can do the same thing by using the coefficients of a polynomial! The powers of <span class="math notranslate nohighlight">\(x\)</span> are simply counting variables corresponding to the indices of our list or the keys of our dictionary, and the coefficients can then be used to store the values. It’s clever, but is it useful?</p>
+<p>As we show in the next chapter, it is straightforward to recover the probability distribution from its PGF. So it is a proper data structure.
 But why work with the latter?
 Mainly because for certain applications, it is possible to find an analytical expression for the PGF, or define an algorithm solving it, while it is much more complicated (or impossible) to have an explicit formula (or an algorithm) for the probability distribution directly.</p>
 <section id="a-simple-example-rolling-dice">
 <h2>A simple example: Rolling dice<a class="headerlink" href="#a-simple-example-rolling-dice" title="Permalink to this headline">#</a></h2>
-<p>Throughout this first part of the book, we will often use this simple example—rolling a certain number of six-sided dice, then try to estimate the probability of some event.
-With a single die for instance, the possible outcomes are quite simple: <span class="math notranslate nohighlight">\(n \in \lbrace 1, 2, 3, 4, 5, 6 \rbrace\)</span>, all with equal probability <span class="math notranslate nohighlight">\(p_n = 1/6\)</span>.
+<p>Throughout this first part of the book, we will often use this simple example—rolling a certain number of four- or six-sided dice, then try to estimate the probability of some event.
+With a single six-sided die for instance, the possible outcomes are quite simple: <span class="math notranslate nohighlight">\(n \in \lbrace 1, 2, 3, 4, 5, 6 \rbrace\)</span>, all with equal probability <span class="math notranslate nohighlight">\(p_n = 1/6\)</span>.
 The corresponding PGF is simply</p>
 <div class="math notranslate nohighlight">
 \[
-g(x) = \frac{1}{6}(x + x^2 + x^3 + x^4 + x^5 + x^6) = \sum_{n=1}^6 \frac{1}{6} x^n \;.
+g_6(x) = \frac{1}{6}(x + x^2 + x^3 + x^4 + x^5 + x^6) = \sum_{n=1}^6 \frac{1}{6} x^n \;.
 \]</div>
-<p>But now what happens when we use more multiple dice?
-What is now the probability to observe a certain result, such as <span class="math notranslate nohighlight">\(n = 8\)</span>?
+<p>Even simpler, a single four-sided die has only four possible outcomes: <span class="math notranslate nohighlight">\(n \in \lbrace 1, 2, 3, 4 \rbrace\)</span>, all with equal probability <span class="math notranslate nohighlight">\(p_n = 1/4\)</span>. The PGF is now</p>
+<div class="math notranslate nohighlight">
+\[
+g_4(x) = \frac{1}{4}(x + x^2 + x^3 + x^4) = \sum_{n=1}^4 \frac{1}{4} x^n \;.
+\]</div>
+<p>But now what happens when we use more than one die?
 To answer these questions, let us highlight some important properties of PGFs.</p>
 </section>
 <section id="sum-of-independent-random-variables">
 <h2>Sum of independent random variables<a class="headerlink" href="#sum-of-independent-random-variables" title="Permalink to this headline">#</a></h2>
-<p>Let’s assume we have two <em>independent</em> random variables, <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>, with PGF <span class="math notranslate nohighlight">\(G_1(x)\)</span> and <span class="math notranslate nohighlight">\(G_2(x)\)</span>. Then, the probability generating function for their sum <span class="math notranslate nohighlight">\(n = n_1 + n_2\)</span> is</p>
+<p>Imagine a game of craps where you have to bet on the summed roll of a six- and a four-sided dice. The result will be anywhere from 2 to 10. But what are the probabilities associated with all values? Mathematically, we can expliclty calculate all possible combinations and their probabilities.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{align}
+&amp;\frac{1}{6}(x + x^2 + x^3 + x^4 + x^5 + x^6) \times \frac{1}{4}(x + x^2 + x^3 + x^4) \\
+=  \;\, &amp;\frac{1}{24}x^2 + \frac{2}{24}x^3 + \frac{3}{24}x^4 + \frac{4}{24}x^5 + \frac{4}{24}x^6 + \frac{4}{24}x^7 + \frac{3}{24}x^8 + \frac{2}{24}x^9 + \frac{1}{24}x^{10} \\
+=  \;\, &amp;g_6(x)g_4(x)
+\end{align}
+\end{split}\]</div>
+<p>So really, this approach is simply multiplying the PGFs! And this holds true in general. If we have two <em>independent</em> random variables, <span class="math notranslate nohighlight">\(n_1\)</span> and <span class="math notranslate nohighlight">\(n_2\)</span>, with PGF <span class="math notranslate nohighlight">\(G_1(x)\)</span> and <span class="math notranslate nohighlight">\(G_2(x)\)</span>. Then, the probability generating function for their sum <span class="math notranslate nohighlight">\(n = n_1 + n_2\)</span> is</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -453,7 +477,12 @@ G(x) &amp;= \sum_{n = 0}^\infty p_{n} x^{n} \;,\\
 </section>
 <section id="a-variable-number-of-random-variables">
 <h2>A variable number of random variables<a class="headerlink" href="#a-variable-number-of-random-variables" title="Permalink to this headline">#</a></h2>
-<p>Building on the previous property, let us assume that <span class="math notranslate nohighlight">\(G_j(x) \equiv F(x)\)</span> for all <span class="math notranslate nohighlight">\(j\)</span>, i.e., <span class="math notranslate nohighlight">\(n\)</span> is the sum of <span class="math notranslate nohighlight">\(m\)</span> independent and identically distributed random variables. Let us also assume that <span class="math notranslate nohighlight">\(m\)</span> is now a random variable as well, with PGF <span class="math notranslate nohighlight">\(H(x)\)</span>. Then</p>
+<p>Imagine a weirder game of craps where you first roll the six-sided die, then roll and sum the results of a number of four-sided dice corresponding to the number obtained on the six-sided die. How can you quickly predict the possible outcomes? With probability <span class="math notranslate nohighlight">\(1/6\)</span>, you get a 1 and roll a single four-sided die whose outcome is generated by <span class="math notranslate nohighlight">\(g_4(x)\)</span> defined above. With probability <span class="math notranslate nohighlight">\(1/6\)</span>, you get a 2 and are therefore summing up the results of two four-sided dice, which we just said should be generated by <span class="math notranslate nohighlight">\(g_4(x)^2\)</span>. And so on… So this weird game is really generating outcomes from a combination of known PGFs.</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{1}{6}g_4(x) + \frac{1}{6}g_4(x)^2 + \frac{1}{6}g_4(x)^3 + \frac{1}{6}g_4(x)^4 + \frac{1}{6}g_4(x)^5 + \frac{1}{6}g_4(x)^6 = g_6(g_4(x))
+\]</div>
+<p>In truth, we are simply building on the previous property. Generally, let us assume that <span class="math notranslate nohighlight">\(G_j(x) \equiv F(x)\)</span> for all <span class="math notranslate nohighlight">\(j\)</span>, i.e., <span class="math notranslate nohighlight">\(n\)</span> is the sum of <span class="math notranslate nohighlight">\(m\)</span> independent and identically distributed random variables. Let us also assume that <span class="math notranslate nohighlight">\(m\)</span> is now a random variable as well, with PGF <span class="math notranslate nohighlight">\(H(x)\)</span>. Then</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
@@ -464,6 +493,14 @@ G(x) &amp;= \sum_{n = 0}^\infty p_{n} x^{n} \;,\\
 \end{align}
 \end{split}\]</div>
 <p>Therefore, the PGF for the sum of a variable number of i.i.d random variable is simply done by taking the composition of PGFs.</p>
+</section>
+<section id="looking-ahead">
+<h2>Looking ahead<a class="headerlink" href="#looking-ahead" title="Permalink to this headline">#</a></h2>
+<p>From these two properties alone, we can already imagine cases where PGFs can be useful. Imagine a ridiculous game of craps where you roll a six-sided die and a four-sided die, sum the outcomes, and roll a corresponding number of six-sided dice. This can quickly become annoying to calculate by hand or even code up! But with PGFs, things stay relatively simple. The sum of the outcomes will be generated by</p>
+<div class="math notranslate nohighlight">
+\[
+g_6(g_6(x))\times g_4(g_6(x))
+\]</div>
 </section>
 </section>
 

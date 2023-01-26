@@ -466,15 +466,15 @@ G_{t}(x) &amp;= G_0(Q^t(x)) \;,
 </section>
 <section id="cumulative-number-of-nodes">
 <h2>Cumulative number of nodes<a class="headerlink" href="#cumulative-number-of-nodes" title="Permalink to this headline">#</a></h2>
-<p>Sometimes, we care more about total size of the tree; for an epidemic process, it would be the total size of the outbreak.
-To characterize, <span class="math notranslate nohighlight">\(m_t\)</span>, the cumulative number of node at time <span class="math notranslate nohighlight">\(t\)</span>, we need to consider the joint distribution <span class="math notranslate nohighlight">\(p_{n_t,m_t}\)</span> with bivariate PGF</p>
+<p>Sometimes, we care more about the total size of the tree; for an epidemic process, it would be the total size of the outbreak.
+To characterize <span class="math notranslate nohighlight">\(m_t\)</span>, the cumulative number of node at time <span class="math notranslate nohighlight">\(t\)</span>, we need to consider the joint distribution <span class="math notranslate nohighlight">\(p_{n_t,m_t}\)</span> with bivariate PGF</p>
 <div class="math notranslate nohighlight">
 \[
 \begin{align}
 G_{t}(x,y)  &amp;= \sum_{n_t=0}^\infty \sum_{m_t=0}^\infty p_{n_t,m_t} x^{n_t}y^{m_t} \;.
 \end{align}
 \]</div>
-<p>The PGF <span class="math notranslate nohighlight">\(G_t(x,y)\)</span> follows a very similar update pattern as <span class="math notranslate nohighlight">\(G_t(x)\)</span>. In fact, if we take any node at generation <span class="math notranslate nohighlight">\(t\)</span>, the number of descendent <em>and</em> the cumulative number of node it produces is the same, therefore, its PGF is <span class="math notranslate nohighlight">\(Q(xy)\)</span>. So the PGF for the sum of descendent and cumulative number of nodes produced at generation <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(Q(xy)^{n_t}\)</span>. Therefore, we have</p>
+<p>The PGF <span class="math notranslate nohighlight">\(G_t(x,y)\)</span> follows a very similar update pattern as <span class="math notranslate nohighlight">\(G_t(x)\)</span>. In fact, if we take any node at generation <span class="math notranslate nohighlight">\(t\)</span>, the number of descendent <em>and</em> the cumulative number of node it produces is the same, therefore, its PGF is <span class="math notranslate nohighlight">\(Q(xy)\)</span>. So the PGF for the sum of descendent and the cumulative number of nodes produced at generation <span class="math notranslate nohighlight">\(t\)</span> is <span class="math notranslate nohighlight">\(Q(xy)^{n_t}\)</span>. Therefore, we have</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{align}
