@@ -19,6 +19,8 @@ parts:
     title: Branching process
   - file: chapters/contagion_on_networks
     title: Contagion on networks
+  - file: chapters/hypergraphs
+    title: Percolation on hypergraphs
 
 - caption: Exercises
   chapters:
