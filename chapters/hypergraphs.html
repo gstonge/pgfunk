@@ -1,0 +1,595 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Hypergraphs &#8212; PGFunk</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exercises part I: throwing dice" href="exercise_dice.html" />
+    <link rel="prev" title="Contagion on networks" href="contagion_on_networks.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">PGFunk</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  PGF 101
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="pgf_properties.html">
+   Definition and properties
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="numerical_inversion.html">
+   Numerical inversion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="multivariate_pgf.html">
+   Multivariate PGF
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Applications
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="branching_process.html">
+   Branching process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contagion_on_networks.html">
+   Contagion on networks
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Percolation on hypergraphs
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Exercises
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="exercise_dice.html">
+   Part I: throwing dice
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="exercise_branching_process.html">
+   Part II: branching process
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="exercise_inference.html">
+   Part III: statistical inference
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/gstonge/pgfunk/main?urlpath=lab/tree/chapters/hypergraphs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/gstonge/pgfunk"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/chapters/hypergraphs.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphs-with-clustering">
+   Graphs with clustering
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#percolation-on-a-hypergraph">
+   Percolation on a hypergraph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lesson-from-hypergraphs">
+   Lesson from hypergraphs
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Hypergraphs</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#graphs-with-clustering">
+   Graphs with clustering
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#percolation-on-a-hypergraph">
+   Percolation on a hypergraph
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lesson-from-hypergraphs">
+   Lesson from hypergraphs
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="hypergraphs">
+<h1>Hypergraphs<a class="headerlink" href="#hypergraphs" title="Permalink to this headline">#</a></h1>
+<p>When studying random networks, multivariate PGFs can be useful to encode different types of connections; i.e., different stubs or degrees. For example, two variables <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> can be used to count in- and out-degree in directed networks. One can then use the framework covered so far almost as is, but has to be careful to operate over the correct variables. E.g., the excess degree of a node will be biased by its in-degree (probability of reaching it) but given by its out-degree. Here, we apply this idea to a popular family of network models: Hypergraphs, where connections can go beyond pairwise interactions between nodes.</p>
+<section id="graphs-with-clustering">
+<h2>Graphs with clustering<a class="headerlink" href="#graphs-with-clustering" title="Permalink to this headline">#</a></h2>
+<p>Consider a random network with two types of interactions: Single edges and Triangles. When picking a node at random in this network, its connectivity can be measured by the number <span class="math notranslate nohighlight">\(s\)</span> of single edges and the number <span class="math notranslate nohighlight">\(t\)</span> of triangles around it. This connectivity is therefore drawn from the following multivariate PGF</p>
+<div class="math notranslate nohighlight">
+\[
+G_0(x,y) = \sum_{s,t}^\infty p_{s,t} x^s y^t
+\]</div>
+<p>If we were interested in its total degree, we would simply have to sum the contributions of single edges and triangles to the degree of the node. Since triangles involve two degrees per node, the degree distribution of the network is generated by</p>
+<div class="math notranslate nohighlight">
+\[
+g_0(z) = \sum_{s,t}^\infty p_{s,t} z^s z^{2t} = G_0(z,z^2)
+\]</div>
+</section>
+<section id="percolation-on-a-hypergraph">
+<h2>Percolation on a hypergraph<a class="headerlink" href="#percolation-on-a-hypergraph" title="Permalink to this headline">#</a></h2>
+<p>Following the procedure outlined in our contagion on network section, we now want to calculate the excess connectivity of a node reached by following a random single edge:</p>
+<div class="math notranslate nohighlight">
+\[
+G_s(x,y) \propto \sum_{s,t}^\infty sp_{s,t} x^{s-1} y^t = \frac{1}{\langle s\rangle}\frac{\partial}{\partial x}G_0(x,y)
+\]</div>
+<p>and similarly when following a random triangle</p>
+<div class="math notranslate nohighlight">
+\[
+G_t(x,y) \propto \sum_{s,t}^\infty tp_{s,t} x^{s} y^{t-1} = \frac{1}{\langle t\rangle}\frac{\partial}{\partial y}G_0(x,y)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(\langle s\rangle\)</span> and <span class="math notranslate nohighlight">\(\langle t\rangle\)</span> are simply the average number of single edges and triangles per node and just act as a normalization factor so that <span class="math notranslate nohighlight">\(G_s(1,1) = G_t(1,1) = 1\)</span>.</p>
+<p>We can then ask what is the probability <span class="math notranslate nohighlight">\(u\)</span> that the node reached by following a single edge does not belong to a giant cluster, and the probability <span class="math notranslate nohighlight">\(v^2\)</span> that neither nodes reached by following a triangle lead to a giant cluster. To make this calculation easier, we reverse the previous argument and ask for the following self-coherent relation</p>
+<div class="math notranslate nohighlight">
+\[
+u = (1-T)+TG_s(u,v^2) = 1-T[1-G_s(u,v^2)]
+\]</div>
+<p>since a single edge does not lead to the giant cluster if it doesn’t exist (probability <span class="math notranslate nohighlight">\(1-T\)</span>) or if it does, then none of its excess connections must lead to the giant cluster (probability <span class="math notranslate nohighlight">\(TG_s(u,v^2)\)</span>). Things are a bit more complicated for <span class="math notranslate nohighlight">\(v^2\)</span> since a triangle can be in more than two states after percolation. We state</p>
+<div class="math notranslate nohighlight">
+\[
+v^2 = (1-T)^2+ 2T(1-T)^2G_t(u,v^2) + 2T^2(1-T)G_t(u,v^2)^2 + T^2G_t(u,v^2)^2 = 1-2T(1-T)^2[1-G_t(u,v^2)]-T^2(3-2T)[1-G_t(u,v^2)^2]
+\]</div>
+<p>where in the middle expression, we account in order: For the probability that none of the two leaving the node on the triangle exist, the probability that only one exists and the third edge doesn’t, the probability that only one exists but the third edge does, and the probability that both of the first edges encountered exist. We then simply need to account for the probabilities that the nodes reached (if any) do not lead to the giant cluster with their excess connections, which leads to the different powers of <span class="math notranslate nohighlight">\(G_t(u,v^2)\)</span>. These self-coherent expressions are more complicated than before, but can be solved in the exact same way.</p>
+<p>Once that is done, we then calculate the size of the giant cluster as before</p>
+<div class="math notranslate nohighlight">
+\[
+S = 1-G_0(u,v^2) \; .
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">([</span><span class="s1">&#39;ggplot&#39;</span><span class="p">,</span> <span class="s1">&#39;seaborn-talk&#39;</span><span class="p">])</span>
+
+<span class="c1"># We set the distribution p_st to two independent Poisson distribution</span>
+<span class="c1">#   with means mu for single edges and nu for triangles</span>
+<span class="k">def</span> <span class="nf">G0</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+            <span class="n">value</span><span class="o">+=</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span><span class="o">-</span><span class="n">nu</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">nu</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="n">t</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">def</span> <span class="nf">Gs</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+            <span class="n">value</span><span class="o">+=</span><span class="n">s</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span><span class="o">-</span><span class="n">nu</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">nu</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="n">t</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+<span class="k">def</span> <span class="nf">Gt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">nu</span><span class="p">):</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+            <span class="n">value</span><span class="o">+=</span><span class="n">t</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">mu</span><span class="o">-</span><span class="n">nu</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="n">t</span><span class="p">)))</span><span class="o">*</span><span class="p">(</span><span class="n">mu</span><span class="o">*</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">nu</span><span class="o">*</span><span class="n">y</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">value</span>
+
+<span class="c1">#Values of average connectivity to explore</span>
+<span class="n">mu_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">]</span> 
+<span class="n">nu_vec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> 
+
+<span class="k">for</span> <span class="n">mu</span><span class="p">,</span><span class="n">nu</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mu_vec</span><span class="p">,</span> <span class="n">nu_vec</span><span class="p">):</span>
+    <span class="n">Tlist</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">0.6</span><span class="p">,</span><span class="mi">200</span><span class="p">)</span>
+    <span class="n">usol</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">vsol</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">Pext</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1">#Iterate over occupation probability</span>
+    <span class="k">for</span> <span class="n">T</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">Tlist</span><span class="p">):</span>
+        <span class="n">u1</span> <span class="o">=</span> <span class="n">usol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">usol</span> <span class="k">else</span> <span class="mf">0.5</span>
+        <span class="n">v1</span> <span class="o">=</span> <span class="n">vsol</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="k">if</span> <span class="n">usol</span> <span class="k">else</span> <span class="mf">0.5</span>
+        <span class="n">u2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Gs</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">nu</span><span class="p">))</span>
+        <span class="n">v2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">T</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Gt</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">nu</span><span class="p">))</span><span class="o">-</span><span class="n">T</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Gt</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">nu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1">#Iterate equations to find the self-consistent point</span>
+        <span class="k">while</span>  <span class="nb">abs</span><span class="p">(</span><span class="n">u2</span><span class="o">-</span><span class="n">u1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">abs</span><span class="p">(</span><span class="n">v2</span><span class="o">-</span><span class="n">v1</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">):</span>
+            <span class="n">u1</span> <span class="o">=</span> <span class="n">u2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">v1</span> <span class="o">=</span> <span class="n">v2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="n">u2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Gs</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">nu</span><span class="p">))</span>
+            <span class="n">v2</span> <span class="o">=</span> <span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">T</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Gt</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">nu</span><span class="p">))</span><span class="o">-</span><span class="n">T</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="mi">3</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">T</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Gt</span><span class="p">(</span><span class="n">u1</span><span class="p">,</span><span class="n">v1</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">nu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">usol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u2</span><span class="p">)</span>
+        <span class="n">vsol</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+        <span class="n">Pext</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">G0</span><span class="p">(</span><span class="n">u2</span><span class="p">,</span><span class="n">v2</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">nu</span><span class="p">))</span>
+    <span class="n">Pext</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">Pext</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Tlist</span><span class="p">,</span><span class="n">Pext</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="sa">r</span><span class="s1">&#39;average # of triangles = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">nu</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Occupation Probability $T$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;Giant cluster size&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/hypergraphs_18_0.png" src="../_images/hypergraphs_18_0.png" />
+</div>
+</div>
+</section>
+<section id="lesson-from-hypergraphs">
+<h2>Lesson from hypergraphs<a class="headerlink" href="#lesson-from-hypergraphs" title="Permalink to this headline">#</a></h2>
+<p>The previous results are surprising. Let’s think about it. We picked values of <span class="math notranslate nohighlight">\(\langle s\rangle\)</span> and <span class="math notranslate nohighlight">\(\langle t\rangle\)</span> such that the average degree is always preserved. With more triangles, we find that the size of the giant component (found at high occupation probability) is reduced by clustering. However, the percolation threshold where a giant cluster first appears is decreased by clustering! Could it be that clustering hurt the giant component of the network by making redundant connections but help percolation by giving second chances to reach certain nodes?</p>
+<p>No! Clustering in and of itself should always hurt connectivity for a simple process like percolation. What is going on? Going beyond pairwise corrections does not just introduce local loops in our network, it also introduce degree correlations. Following an edge selects nodes proportionally to their degree, and thus nodes of degree at least one; but following a triangle selects nodes proportionally to their number of triangles, and thus of degree at least 2. This hypergraph is not so random anymore. There are short loops, and nodes of high degree are more likely to be connected than expected at random.</p>
+<p>Loops hinder the formation of percolation clusters, but degree correlations help!</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./chapters"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="contagion_on_networks.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Contagion on networks</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="exercise_dice.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exercises part I: throwing dice</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Antoine Allard, Laurent Hébert-Dufresne, Guillaume St-Onge<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
