@@ -21,6 +21,8 @@ parts:
     title: Contagion on networks
   - file: chapters/hypergraphs
     title: Percolation on hypergraphs
+  - file: chapters/message_passing
+    title: Message passing
 
 - caption: Exercises
   chapters:
