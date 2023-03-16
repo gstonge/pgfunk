@@ -3,6 +3,7 @@
 
 title: PGFunk
 author: Antoine Allard, Laurent Hébert-Dufresne, Guillaume St-Onge
+copyright : "2022-2023"
 logo: "logo.png"
 
 # Force re-execution of notebooks on each build.
