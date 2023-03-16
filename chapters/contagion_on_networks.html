@@ -484,7 +484,11 @@ u=G_1(1-T+Tu)
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/contagion_on_networks_20_0.png" src="../_images/contagion_on_networks_20_0.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/dl/46h2pcs13c1gj57q8lthvc1c0000gn/T/ipykernel_76764/1409343624.py:3: MatplotlibDeprecationWarning: The seaborn styles shipped by Matplotlib are deprecated since 3.6, as they no longer correspond to the styles shipped by seaborn. However, they will remain available as &#39;seaborn-v0_8-&lt;style&gt;&#39;. Alternatively, directly use the seaborn API instead.
+  plt.style.use([&#39;ggplot&#39;, &#39;seaborn-talk&#39;])
+</pre></div>
+</div>
+<img alt="../_images/contagion_on_networks_20_1.png" src="../_images/contagion_on_networks_20_1.png" />
 </div>
 </div>
 <p>You can see a clear transition, or an epidemic threshold, where the probability of extinction starts falling below <span class="math notranslate nohighlight">\(100\%\)</span>. This is when the <a class="reference external" href="https://en.wikipedia.org/wiki/Basic_reproduction_number">Basic Reproduction Number</a> rises above 1. In terms of our PGF, this number <span class="math notranslate nohighlight">\(R_0\)</span> can be calculated as</p>
@@ -567,7 +571,7 @@ H_0(x) = xG_0(1-T+TH_1(x))
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probability of extinction =  0.9999984684581261
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Probability of extinction =  0.9999984684581256
 </pre></div>
 </div>
 </div>
@@ -587,7 +591,7 @@ H_0(x) = xG_0(1-T+TH_1(x))
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./chapters"
         },
         predefinedOutput: true
